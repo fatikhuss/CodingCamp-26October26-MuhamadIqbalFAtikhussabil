@@ -1,0 +1,625 @@
+/* Expense & Budget Visualizer — styles */
+
+/* ==========================================================================
+   1. Base / Reset
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #1a1a2e;
+  background-color: #f0f2f5;
+  overflow-x: hidden;
+  min-width: 320px;
+}
+
+img,
+canvas {
+  max-width: 100%;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ==========================================================================
+   2. Storage Banner
+   ========================================================================== */
+
+.banner {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.banner--error {
+  background-color: #fde8e8;
+  color: #c0392b;
+  border-bottom: 2px solid #c0392b;
+}
+
+/* ==========================================================================
+   3. Main Wrapper
+   ========================================================================== */
+
+main {
+  max-width: 1920px;
+  margin: 0 auto;
+  padding: 1.25rem;
+  overflow-x: hidden;
+}
+
+h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 1.25rem;
+  text-align: center;
+}
+
+/* ==========================================================================
+   4. Balance Display
+   ========================================================================== */
+
+#balance-display {
+  background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+  color: #e0e0e0;
+  padding: 1.25rem 1.5rem;
+  border-radius: 12px;
+  font-size: 1.125rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#balance-amount {
+  display: inline-block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #e94560;
+  margin-left: 0.5rem;
+  letter-spacing: 0.5px;
+}
+
+/* ==========================================================================
+   5. Card-style Sections
+   ========================================================================== */
+
+section {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+section h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #0f3460;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f0f2f5;
+}
+
+/* ==========================================================================
+   6. Form
+   ========================================================================== */
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #444;
+}
+
+input[type="text"],
+input[type="number"],
+select {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  font-size: 1rem;
+  font-family: inherit;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  background-color: #fafafa;
+  color: #1a1a2e;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  min-height: 44px;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+select:focus {
+  outline: none;
+  border-color: #0f3460;
+  box-shadow: 0 0 0 3px rgba(15, 52, 96, 0.15);
+  background-color: #fff;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  font-family: inherit;
+  font-weight: 600;
+  color: #fff;
+  background-color: #e94560;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  min-height: 44px;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+button[type="submit"]:hover {
+  background-color: #c73652;
+}
+
+button[type="submit"]:active {
+  transform: scale(0.98);
+}
+
+/* ==========================================================================
+   7. Inline Error Messages
+   ========================================================================== */
+
+.error-msg {
+  font-size: 0.8125rem;
+  color: #c0392b;
+  font-weight: 500;
+  min-height: 1.1em;
+}
+
+/* ==========================================================================
+   8. Transaction List
+   ========================================================================== */
+
+#empty-msg {
+  color: #888;
+  font-size: 0.9375rem;
+  text-align: center;
+  padding: 1rem 0;
+}
+
+#transaction-list {
+  max-height: 400px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#transaction-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.625rem 0.875rem;
+  background-color: #f8f9fb;
+  border: 1px solid #e8eaed;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  min-height: 44px;
+}
+
+.tx-name {
+  flex: 1 1 auto;
+  font-weight: 600;
+  color: #1a1a2e;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tx-amount {
+  font-weight: 700;
+  color: #e94560;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.tx-category {
+  font-size: 0.8125rem;
+  color: #555;
+  background-color: #e8f0fe;
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.delete-btn {
+  background: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  color: #c0392b;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  flex-shrink: 0;
+  min-height: 32px;
+  min-width: 32px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.delete-btn:hover {
+  background-color: #fde8e8;
+  border-color: #c0392b;
+}
+
+/* ==========================================================================
+   9. Chart Section
+   ========================================================================== */
+
+#chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+#spending-chart {
+  max-width: 100%;
+  max-height: 300px;
+}
+
+#chart-empty-msg {
+  color: #888;
+  font-size: 0.9375rem;
+  text-align: center;
+}
+
+/* ==========================================================================
+   10. Responsive Layout — CSS Grid
+   ========================================================================== */
+
+/* --- Mobile: 320px–480px — single-column stack --- */
+@media (max-width: 480px) {
+  main {
+    padding: 0.875rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  h1 {
+    font-size: 1.375rem;
+  }
+
+  #balance-amount {
+    font-size: 1.5rem;
+  }
+
+  /* Task 11.2 — touch targets */
+  input,
+  select,
+  button,
+  #transaction-list li {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Task 11.2 — minimum 16px font to prevent browser auto-zoom */
+  body,
+  input,
+  select,
+  button {
+    font-size: 16px;
+  }
+}
+
+/* --- Tablet: 481px–1024px — two-column layout --- */
+@media (min-width: 481px) and (max-width: 1024px) {
+  main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 1.25rem;
+    align-items: start;
+  }
+
+  /*
+   * Row 1: h1 spans full width
+   * Row 2: balance spans full width
+   * Row 3: form (left) | chart (right)
+   * Row 4: list spans full width
+   */
+  main > h1 {
+    grid-column: 1 / -1;
+  }
+
+  #balance-display {
+    grid-column: 1 / -1;
+  }
+
+  #form-section {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  #chart-section {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  #list-section {
+    grid-column: 1 / -1;
+    grid-row: 4;
+  }
+}
+
+/* --- Desktop: 1025px–1920px — multi-column layout --- */
+@media (min-width: 1025px) {
+  main {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(300px, 1.5fr) minmax(280px, 1fr);
+    grid-template-rows: auto auto auto;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  main > h1 {
+    grid-column: 1 / -1;
+  }
+
+  #balance-display {
+    grid-column: 1 / -1;
+  }
+
+  #form-section {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  #list-section {
+    grid-column: 2;
+    grid-row: 3;
+  }
+
+  #chart-section {
+    grid-column: 3;
+    grid-row: 3;
+  }
+
+  #transaction-list {
+    max-height: 500px;
+  }
+
+  #spending-chart {
+    max-height: 360px;
+  }
+}
+
+/* ==========================================================================
+   11. Income / Expense Visual Differentiation (Task 8.1)
+   ========================================================================== */
+
+#transaction-list li.income {
+  border-left: 4px solid #27ae60;
+}
+
+#transaction-list li.expense {
+  border-left: 4px solid #e94560;
+}
+
+/* ==========================================================================
+   12. Transaction Type Badge (Task 8.2)
+   ========================================================================== */
+
+.tx-type {
+  font-size: 0.8125rem;
+  color: #fff;
+  background-color: #0f3460;
+  padding: 0.2rem 0.55rem;
+  border-radius: 20px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+#transaction-list li.income .tx-type {
+  background-color: #27ae60;
+}
+
+#transaction-list li.expense .tx-type {
+  background-color: #e94560;
+}
+
+/* ==========================================================================
+   13. Dark Mode (Task 8.3)
+   ========================================================================== */
+
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+body.dark-mode main {
+  background-color: #121212;
+}
+
+body.dark-mode h1,
+body.dark-mode section h2 {
+  color: #e0e0e0;
+}
+
+body.dark-mode section {
+  background-color: #1e1e1e;
+  border-color: #333;
+}
+
+body.dark-mode #transaction-list li {
+  background-color: #2a2a2a;
+  border-color: #444;
+}
+
+body.dark-mode .tx-name {
+  color: #e0e0e0;
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode input[type="number"],
+body.dark-mode select {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #555;
+}
+
+body.dark-mode .form-group label {
+  color: #ccc;
+}
+
+/* ==========================================================================
+   14. Theme Toggle Button (Task 8.4)
+   ========================================================================== */
+
+#theme-toggle {
+  display: block;
+  margin: 0 auto 1rem;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  font-weight: 600;
+  color: #0f3460;
+  background-color: #e8f0fe;
+  border: 1.5px solid #0f3460;
+  border-radius: 8px;
+  cursor: pointer;
+  min-height: 44px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+#theme-toggle:hover {
+  background-color: #0f3460;
+  color: #fff;
+}
+
+body.dark-mode #theme-toggle {
+  color: #e0e0e0;
+  background-color: #2a2a2a;
+  border-color: #e0e0e0;
+}
+
+body.dark-mode #theme-toggle:hover {
+  background-color: #e0e0e0;
+  color: #121212;
+}
+
+/* ==========================================================================
+   15. Custom Category Section (Task 8.4)
+   ========================================================================== */
+
+#custom-category-list {
+  margin-top: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+#custom-category-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.75rem;
+  background-color: #f8f9fb;
+  border: 1px solid #e8eaed;
+  border-radius: 6px;
+  font-size: 0.9375rem;
+}
+
+#custom-category-list li .delete-category-btn {
+  background: none;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  color: #c0392b;
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 0.15rem 0.4rem;
+  transition: background-color 0.2s;
+}
+
+#custom-category-list li .delete-category-btn:hover {
+  background-color: #fde8e8;
+  border-color: #c0392b;
+}
+
+body.dark-mode #custom-category-list li {
+  background-color: #2a2a2a;
+  border-color: #444;
+  color: #e0e0e0;
+}
+
+/* ==========================================================================
+   16. Sort Controls (Task 8.5)
+   ========================================================================== */
+
+#sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+#sort-controls label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #444;
+}
+
+#sort-field,
+#sort-direction {
+  width: auto;
+  min-width: 120px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9375rem;
+  font-family: inherit;
+  border: 1.5px solid #ccc;
+  border-radius: 8px;
+  background-color: #fafafa;
+  color: #1a1a2e;
+  cursor: pointer;
+  min-height: 40px;
+  transition: border-color 0.2s;
+}
+
+#sort-field:focus,
+#sort-direction:focus {
+  outline: none;
+  border-color: #0f3460;
+  box-shadow: 0 0 0 3px rgba(15, 52, 96, 0.15);
+}
+
+body.dark-mode #sort-field,
+body.dark-mode #sort-direction {
+  background-color: #2a2a2a;
+  color: #e0e0e0;
+  border-color: #555;
+}
+
+body.dark-mode #sort-controls label {
+  color: #ccc;
+}
